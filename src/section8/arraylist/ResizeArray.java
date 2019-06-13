@@ -1,4 +1,4 @@
-package section8.lists;
+package section8.arraylist;
 
 import java.util.Arrays;
 

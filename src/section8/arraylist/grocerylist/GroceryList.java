@@ -1,10 +1,14 @@
-package section8.lists.grocerylist;
+package section8.arraylist.grocerylist;
 
 import java.util.ArrayList;
 
 public class GroceryList {
 
     private ArrayList<String> groceryList = new ArrayList<>();
+
+    public ArrayList<String> getGroceryList() {
+        return groceryList;
+    }
 
     public void addGroceryItem(String item) {
         groceryList.add(item);
@@ -17,7 +21,7 @@ public class GroceryList {
         }
     }
 
-    public void modifiyGroceryItem(int position, String newItem) {
+    private void modifiyGroceryItem(int position, String newItem) {
         groceryList.set(position, newItem);
         System.out.println("Grocery item " + (position+1) + " has been modified.");
     }
@@ -36,17 +40,9 @@ public class GroceryList {
         }
     }
 
-    public void removeGroceryItem(int position) {
+    private void removeGroceryItem(int position) {
         groceryList.remove(position);
     }
-
-//    public String findItem(String searchItem) {
-//        int position = groceryList.indexOf(searchItem);
-//        if (position >= 0) {
-//            return groceryList.get(position);
-//        }
-//        return null;
-//    }
 
     public int findItem(String searchItem) {
         return groceryList.indexOf(searchItem);
