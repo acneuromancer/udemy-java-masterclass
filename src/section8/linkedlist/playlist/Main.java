@@ -60,13 +60,11 @@ public class Main {
         }
 
         while(!quit) {
-            int action = 0;
-
             while(!scanner.hasNextInt()) {
                scanner.nextLine();
             }
 
-            action = scanner.nextInt();
+            int action = scanner.nextInt();
             scanner.nextLine();
 
             switch (action) {
