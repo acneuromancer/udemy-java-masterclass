@@ -1,4 +1,4 @@
-package section10.teams;
+package section10.generics;
 
 public abstract class Player {
 

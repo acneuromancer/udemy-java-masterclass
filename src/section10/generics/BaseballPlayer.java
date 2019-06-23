@@ -1,4 +1,4 @@
-package section10.teams;
+package section10.generics;
 
 public class BaseballPlayer extends Player {
 
