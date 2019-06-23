@@ -1,4 +1,4 @@
-package section11.packages.awtexample;
+package section11.packages.awtsample;
 
 public class Main {
 
