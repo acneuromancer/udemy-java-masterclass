@@ -1,4 +1,4 @@
-package section11._final;
+package section11.staticfinal;
 
 public class Password {
 
