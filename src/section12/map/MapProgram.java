@@ -27,6 +27,26 @@ public class MapProgram {
         System.out.println(languages.put("Lisp", "Therein lies madness"));
 
         System.out.println("=====================");
+
+        if (languages.remove("Lisp")!= null) {
+            System.out.println("Lisp key and its value removed from the map");
+        } else {
+            System.out.println("Lisp key and its value not removed from the map");
+        }
+
+        if (languages.remove("Lisp") != null) {
+            System.out.println("Lisp key and its value removed from the map");
+        } else {
+            System.out.println("Lisp key and its value not removed from the map");
+        }
+
+        if (languages.remove("Algol", "a family of algorithmic languages")) {
+            System.out.println("Algol removed");
+        } else {
+            System.out.println("Algol not removed, key value pair not found");
+        }
+
+        System.out.println("=====================");
         for (String key : languages.keySet()) {
             System.out.println(key + ": " + languages.get(key));
         }
