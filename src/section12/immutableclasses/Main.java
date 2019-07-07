@@ -10,9 +10,10 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Map<String, Integer> tempExit = new HashMap<>();
-        locations.put(0, new Location(0, "You are sitting in front of a computer learning Java", tempExit));
 
+        locations.put(0, new Location(0, "You are sitting in front of a computer learning Java", null));
+
+        Map<String, Integer> tempExit = new HashMap<>();
         tempExit = new HashMap<>();
         tempExit.put("W", 2);
         tempExit.put("E", 3);
