@@ -168,5 +168,4 @@ public class Main {
         planets.add(temp);
     }
 
-
 }
