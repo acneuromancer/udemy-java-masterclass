@@ -1,4 +1,4 @@
-package section14.readingbinarydata;
+package section14._05_bufferedwriterchallenge;
 
 import java.util.HashMap;
 import java.util.Map;

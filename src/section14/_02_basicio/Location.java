@@ -1,10 +1,9 @@
-package section14.bufferedwriterchallenge;
+package section14._02_basicio;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Location {
-
     private final int locationID;
     private final String description;
     private final Map<String, Integer> exits;
@@ -12,13 +11,17 @@ public class Location {
     public Location(int locationID, String description, Map<String, Integer> exits) {
         this.locationID = locationID;
         this.description = description;
-        if (exits != null) {
-            this.exits = new LinkedHashMap<>(exits);
+        if(exits != null) {
+            this.exits = new HashMap<String, Integer>(exits);
         } else {
-            this.exits = new LinkedHashMap<>();
+            this.exits = new HashMap<String, Integer>();
         }
         this.exits.put("Q", 0);
     }
+
+//    public void addExit(String direction, int location) {
+//        exits.put(direction, location);
+//    }
 
     public int getLocationID() {
         return locationID;
@@ -29,11 +32,7 @@ public class Location {
     }
 
     public Map<String, Integer> getExits() {
-        return new LinkedHashMap<>(exits);
-    }
-
-    protected void addExit(String direction, int location) {
-        exits.put(direction, location);
+        return new HashMap<String, Integer>(exits);
     }
 
 }

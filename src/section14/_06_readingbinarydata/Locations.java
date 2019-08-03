@@ -1,4 +1,4 @@
-package section14.readingbinarydata;
+package section14._06_readingbinarydata;
 
 import java.io.*;
 import java.util.*;

@@ -1,6 +1,6 @@
-package section14.filereaderandcloseable;
+package section14._06_readingbinarydata;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Location {
@@ -12,17 +12,13 @@ public class Location {
     public Location(int locationID, String description, Map<String, Integer> exits) {
         this.locationID = locationID;
         this.description = description;
-        if(exits != null) {
-            this.exits = new HashMap<String, Integer>(exits);
+        if (exits != null) {
+            this.exits = new LinkedHashMap<>(exits);
         } else {
-            this.exits = new HashMap<String, Integer>();
+            this.exits = new LinkedHashMap<>();
         }
         this.exits.put("Q", 0);
     }
-
-//    public void addExit(String direction, int location) {
-//        exits.put(direction, location);
-//    }
 
     public int getLocationID() {
         return locationID;
@@ -33,7 +29,7 @@ public class Location {
     }
 
     public Map<String, Integer> getExits() {
-        return new HashMap<String, Integer>(exits);
+        return new LinkedHashMap<>(exits);
     }
 
     protected void addExit(String direction, int location) {
