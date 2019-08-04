@@ -1,4 +1,4 @@
-package section14._08_nio;
+package section14._08_nio.bufferedstreams;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -38,6 +38,7 @@ public class Location implements Serializable {
     public Map<String, Integer> getExits() {
         return new LinkedHashMap<String, Integer>(exits);
     }
+
     protected void addExit(String direction, int location) {
         exits.put(direction, location);
     }

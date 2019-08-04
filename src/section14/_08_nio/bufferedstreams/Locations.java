@@ -1,4 +1,4 @@
-package section14._08_nio;
+package section14._08_nio.bufferedstreams;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -112,7 +112,6 @@ public class Locations implements Map<Integer, Location> {
     @Override
     public void clear() {
         locations.clear();
-
     }
 
     @Override
