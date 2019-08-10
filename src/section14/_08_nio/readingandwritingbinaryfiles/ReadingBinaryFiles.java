@@ -1,11 +1,11 @@
-package section14._08_nio.writingbinaryfiles;
+package section14._08_nio.readingandwritingbinaryfiles;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-public class Main {
+public class ReadingBinaryFiles {
 
     public static void main(String[] args) {
         try (FileOutputStream binFile = new FileOutputStream("data.dat");

@@ -22,7 +22,7 @@ public class StaticInitializationBlockTest {
     }
 
     public static void main(String[] args) {
-        System.out.println("Main method called.");
+        System.out.println("ReadingBinaryFiles method called.");
         StaticInitializationBlockTest test = new StaticInitializationBlockTest();
         test.someMethod();
         System.out.println("Owner is " + StaticInitializationBlockTest.owner);
