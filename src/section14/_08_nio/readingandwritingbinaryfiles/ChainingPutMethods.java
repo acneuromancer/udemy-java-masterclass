@@ -12,7 +12,6 @@ public class ChainingPutMethods {
         try (FileOutputStream binFile = new FileOutputStream("data.dat");
              FileChannel binChannel = binFile.getChannel()) {
 
-
             // Writing data
             ByteBuffer buffer = ByteBuffer.allocate(100);
 
