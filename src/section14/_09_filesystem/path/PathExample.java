@@ -9,9 +9,16 @@ import java.nio.file.Paths;
 
 public class PathExample {
 
+    private static Path path;
+
     public static void main(String[] args) {
+        example1();
+        example2();
+    }
+
+    private static void example1() {
         // Search for the file in the working directory (the Idea project directory)
-        Path path = FileSystems.getDefault().getPath("WorkingDirectoryFile.txt");
+        path = FileSystems.getDefault().getPath("WorkingDirectoryFile.txt");
         printFile(path);
 
         // Search for the file in the files subdirectory in the working directory
@@ -25,12 +32,22 @@ public class PathExample {
         printFile(path);
     }
 
+    private static void example2() {
+        // The path can be passed in more parts
+        path = FileSystems.getDefault().getPath(".", "files", "SubdirectoryFile.txt");
+        printFile(path);
+        System.out.println("Absolute path = " + path.toAbsolutePath());
+
+        path = FileSystems.getDefault().getPath(".", "files", "..", "files", "SubdirectoryFile.txt");
+        System.out.println("Absolute path = " + path.toAbsolutePath());
+        System.out.println("Normalized path = " + path.normalize());
+    }
 
     private static void printFile(Path path) {
-        try (BufferedReader fileReader = Files.newBufferedReader(path)){
+        try (BufferedReader fileReader = Files.newBufferedReader(path)) {
             String line;
 
-            while((line = fileReader.readLine()) != null) {
+            while ((line = fileReader.readLine()) != null) {
                 System.out.println(line);
             }
 
