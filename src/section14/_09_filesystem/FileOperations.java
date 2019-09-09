@@ -1,4 +1,4 @@
-package section14._09_filesystem.path;
+package section14._09_filesystem;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
