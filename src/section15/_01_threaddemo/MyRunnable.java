@@ -1,6 +1,6 @@
-package section15.threaddemo;
+package section15._01_threaddemo;
 
-import static section15.threaddemo.ThreadColor.ANSI_RED;
+import static section15._01_threaddemo.ThreadColor.ANSI_RED;
 
 public class MyRunnable implements Runnable {
 

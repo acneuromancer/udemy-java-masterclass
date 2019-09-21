@@ -1,6 +1,6 @@
-package section15.threaddemo;
+package section15._01_threaddemo;
 
-import static section15.threaddemo.ThreadColor.ANSI_BLUE;
+import static section15._01_threaddemo.ThreadColor.ANSI_BLUE;
 
 public class AnotherThread extends Thread {
 

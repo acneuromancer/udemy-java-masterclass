@@ -1,4 +1,4 @@
-package section15.threaddemo;
+package section15._01_threaddemo;
 
 public class ThreadColor {
 
