@@ -32,5 +32,13 @@ public class BankAccount {
             lock.unlock();
         }
     }
-    
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void printAccountNumber() {
+        System.out.println("Account number = " + accountNumber);
+    }
+
 }
