@@ -17,10 +17,15 @@ public class BankAccount {
     }
 
     public void deposit(double amount) {
+        // Local variables are stored on the thread stack, so each thread will have it's own copy.
+        // Threads won't interfere when it comes to setting or getting the status value.
+        boolean status = false;
+
         try {
             if (lock.tryLock(1000, TimeUnit.MILLISECONDS)) {
                 try {
                     balance += amount;
+                    status = true;
                 } finally {
                     lock.unlock();
                 }
@@ -30,13 +35,18 @@ public class BankAccount {
         } catch (InterruptedException e) {
 
         }
+
+        System.out.println("Transaction status = " + status);
     }
 
     public void withdraw(double amount) {
+        boolean status = false;
+
         try {
             if (lock.tryLock(1000, TimeUnit.MILLISECONDS)) {
                 try {
                     balance -= amount;
+                    status = true;
                 } finally {
                     lock.unlock();
                 }
@@ -46,6 +56,8 @@ public class BankAccount {
         } catch (InterruptedException e) {
 
         }
+
+        System.out.println("Transaction status = " + status);
     }
 
     public String getAccountNumber() {
@@ -54,6 +66,29 @@ public class BankAccount {
 
     public void printAccountNumber() {
         System.out.println("Account number = " + accountNumber);
+    }
+
+    public static void main(String[] args) {
+        BankAccount bankAccount = new BankAccount("12345-67890", 1000.00);
+
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                bankAccount.deposit(300.00);
+                bankAccount.withdraw(50.00);
+            }
+        });
+
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                bankAccount.deposit(203.75);
+                bankAccount.withdraw(100.00);
+            }
+        });
+
+        thread1.start();
+        thread2.start();
     }
 
 }
