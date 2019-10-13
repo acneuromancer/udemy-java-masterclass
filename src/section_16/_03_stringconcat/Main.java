@@ -17,7 +17,8 @@ public class Main {
         System.out.println(myString);
 
         myString = doStringStuff((s1, s2) -> {
-            // If the lambda body contains more statements, we have to return the value explicitly.
+            // If the lambda body contains more statements, or we add the curly braces,
+            // we have to return the result explicitly.
             String result = s1.toUpperCase() + s2.toUpperCase();
             return result;
         }, "Hello", "World");
