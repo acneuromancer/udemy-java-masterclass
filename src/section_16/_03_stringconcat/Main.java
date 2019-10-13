@@ -15,6 +15,13 @@ public class Main {
         UpperConcat uc = (String s1, String s2) -> s1.toUpperCase() + s2.toUpperCase();
         myString = doStringStuff(uc, "Hello", "World");
         System.out.println(myString);
+
+        myString = doStringStuff((s1, s2) -> {
+            // If the lambda body contains more statements, we have to return the value explicitly.
+            String result = s1.toUpperCase() + s2.toUpperCase();
+            return result;
+        }, "Hello", "World");
+        System.out.println(myString);
     }
 
     public final static String doStringStuff(UpperConcat uc, String s1, String s2){
