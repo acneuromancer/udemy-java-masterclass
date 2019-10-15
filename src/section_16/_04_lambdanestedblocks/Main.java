@@ -6,6 +6,8 @@ public class Main {
         AnotherClass anotherClass = new AnotherClass();
         String result = anotherClass.doSomethingScopeLambda();
         System.out.println(result);
+
+        anotherClass.printValue();
     }
 
     public static String doStringStuff(UpperConcat uc, String s1, String s2) {
