@@ -1,4 +1,4 @@
-package section_16._05_functionalinterfaces;
+package section_16._05_functionalinterface.predicate;
 
 import java.util.ArrayList;
 import java.util.List;

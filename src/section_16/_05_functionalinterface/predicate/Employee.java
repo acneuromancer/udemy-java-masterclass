@@ -1,4 +1,4 @@
-package section_16._05_functionalinterfaces;
+package section_16._05_functionalinterface.predicate;
 
 public class Employee {
 
