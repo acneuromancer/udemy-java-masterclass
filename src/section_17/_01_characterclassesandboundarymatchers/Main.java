@@ -65,5 +65,5 @@ public class Main {
         // whole words boundaries
         System.out.println(hasWhitespaces.replaceAll("\\b", "X"));
     }
-    
+
 }
