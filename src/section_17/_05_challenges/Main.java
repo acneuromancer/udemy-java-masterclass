@@ -128,6 +128,20 @@ public class Main {
         String usZipCode = "11111";
         System.out.println(usZipCode.matches("^[0-9]{5}$"));
         System.out.println(usZipCode.matches("^\\d{5}$"));
+
+        /*
+        Challenge #13: US zip codes can be followed by a dash and another four numbers. Write a regular expression that will match those zip codes.
+        */
+        usZipCode = "11111-1111";
+        System.out.println(usZipCode.matches("^\\d{5}-\\d{4}$"));
+
+         /*
+        Challenge #14: Write a regular expression thet will match 5-digit US zip codes, and zip codes that contain the optional 4 digits preceded by a dash.
+        */
+        String usZipCode1 = "11111";
+        String usZipCode2 = "11111-1111";
+        System.out.println(usZipCode1.matches("^\\d{5}(-\\d{4})?$"));
+        System.out.println(usZipCode1.matches("^\\d{5}(-\\d{4})?$"));
     }
 
 }
