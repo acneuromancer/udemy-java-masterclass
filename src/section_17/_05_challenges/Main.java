@@ -58,12 +58,47 @@ public class Main {
         System.out.println(challenge5.replaceAll("a{3}bc{8}d{3}ef{3}g$", "REPLACED"));
 
         /*
-        Write a regular expression that will match a string that starts with a series of letters. The letters
+        Challenge #7: Write a regular expression that will match a string that starts with a series of letters. The letters
         must be followed by a period. After the period, there must be a series of digits. The string "kjisl.22" would match.
         The string "f5.12a" would not. Use the string to test your regular expression.
         */
         String challenge7 = "abcd.135";
         System.out.println(challenge7.matches("^[A-z][a-z]+\\.\\d+$"));
+
+        /*
+        Challenge #8: Modify the regular expression in challenge 7 to use a group, so that we can print all the digits that occur
+        in a string that contains multiple occurences of the pattern.
+         */
+        String challenge8 = "abcd.135uvqz.7tzik.999";
+        pattern = Pattern.compile("[A-za-z]+\\.(\\d+)");
+        matcher = pattern.matcher(challenge8);
+
+        while(matcher.find()) {
+            System.out.println("Occurence: " + matcher.group(1));
+        }
+
+        /*
+        Challenge #9: Let's suppose we're reading strings that match the patterns we used in challenges 7 and 8 from a file.
+        Tabs are used to separate the matches, with one exception. The last match is followed by a newline.
+        */
+        String challenge9 = "abcd.135\tuvqz.7\ttzik.999\n";
+        pattern = Pattern.compile("[A-Za-z]+\\.(\\d+)\\s");
+        matcher = pattern.matcher(challenge9);
+
+        while(matcher.find()) {
+            System.out.println("Occurence: " + matcher.group(1));
+        }
+
+         /*
+        Challenge #10: Instead printing out the numbers themselves, print out their start and end indices.
+        Use the same string we used for challenge 9. Make those indices inclusive.
+        */
+        pattern = Pattern.compile("[A-Za-z]+\\.(\\d+)\\s");
+        matcher = pattern.matcher(challenge9);
+
+        while(matcher.find()) {
+            System.out.println("Occurence: start = " + matcher.start(1) + " end = " + (matcher.end(1)-1));
+        }
     }
 
 }
