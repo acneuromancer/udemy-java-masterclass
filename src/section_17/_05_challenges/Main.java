@@ -121,6 +121,13 @@ public class Main {
         while (matcher.find()) {
             System.out.println("Occurence: " + matcher.group(1));
         }
+
+         /*
+        Challenge #12: Write a regular expression that will match a 5-digit US zip code. Use "11111" as your test string.
+        */
+        String usZipCode = "11111";
+        System.out.println(usZipCode.matches("^[0-9]{5}$"));
+        System.out.println(usZipCode.matches("^\\d{5}$"));
     }
 
 }
