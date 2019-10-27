@@ -99,6 +99,28 @@ public class Main {
         while(matcher.find()) {
             System.out.println("Occurence: start = " + matcher.start(1) + " end = " + (matcher.end(1)-1));
         }
+
+         /*
+        Challenge #11: Suppose we have the following string containing points on a graph within curly braces.
+        Extract what's in the curly braces.
+        */
+
+        // First solution: takes everything out from within the curly braces
+        String challenge11 = "{0, 2}, {0, 5}, {1, 3}, {2, 4}, {x, y}";
+        pattern = Pattern.compile("\\{(.+?)\\}");
+        matcher = pattern.matcher(challenge11);
+
+        while(matcher.find()) {
+            System.out.println("Occurence: " + matcher.group(1));
+        }
+
+        // Second solution: just the digits
+        pattern = Pattern.compile("\\{(\\d+, \\d+)\\}");
+        matcher = pattern.matcher(challenge11);
+
+        while (matcher.find()) {
+            System.out.println("Occurence: " + matcher.group(1));
+        }
     }
 
 }
