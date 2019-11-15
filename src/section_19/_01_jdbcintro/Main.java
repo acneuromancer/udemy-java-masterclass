@@ -1,4 +1,4 @@
-package section_19.jdbcintro;
+package section_19._01_jdbcintro;
 
 import java.sql.*;
 

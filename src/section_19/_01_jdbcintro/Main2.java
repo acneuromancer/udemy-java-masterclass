@@ -1,11 +1,11 @@
-package section_19.jdbcintro;
+package section_19._01_jdbcintro;
 
 import java.sql.*;
 
 public class Main2 {
 
     public static final String DB_NAME = "testjava.db";
-    public static final String CONNECTION_STRING = "jdbc:sqlite:/home/armitage/NetBeansProjects/" + DB_NAME;
+    public static final String CONNECTION_STRING = "jdbc:sqlite:/home/armitage/IdeaProjects/UdemyJavaMasterclass/" + DB_NAME;
 
     public static final String TABLE_CONTACTS = "contacts";
 
