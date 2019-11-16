@@ -5,6 +5,7 @@ import section_19._02_musicdb.model.DataSource;
 import section_19._02_musicdb.model.SongArtist;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     private static DataSource dataSource;
@@ -26,7 +27,7 @@ public class Main {
 
     private static void query1() {
         List<Artist> artists = dataSource.queryArtist(DataSource.ORDER_BY_ASC);
-        if (artists == null && !artists.isEmpty()) {
+        if (artists == null || artists.isEmpty()) {
             System.out.println("No artists!");
         } else {
             artists.forEach(System.out::println);
@@ -35,7 +36,7 @@ public class Main {
 
     private static void query2() {
         List<String> albumsForArtist = dataSource.queryAlbumsForArtist("Iron Maiden", DataSource.ORDER_BY_ASC);
-        if (albumsForArtist == null && !albumsForArtist.isEmpty()) {
+        if (albumsForArtist == null || albumsForArtist.isEmpty()) {
             System.out.println("No albums!");
         } else {
             albumsForArtist.forEach(System.out::println);
@@ -52,7 +53,7 @@ public class Main {
         */
 
         List<SongArtist> songArtists = dataSource.queryArtistForSong("Go Your Own Way", DataSource.ORDER_BY_ASC);
-        if (songArtists == null && !songArtists.isEmpty()) {
+        if (songArtists == null || songArtists.isEmpty()) {
             System.out.println("Couldn't find the artist for the song");
         } else {
             for (SongArtist artist : songArtists) {
@@ -71,9 +72,13 @@ public class Main {
     private static void query5() {
         System.out.println("Create view for SongArtists: " + dataSource.createViewForSongArtist());
 
-        List<SongArtist> songArtists = dataSource.querySongInfoView("She's On Fire");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a song title:");
+        String title = scanner.nextLine();
 
-        if (songArtists == null && !songArtists.isEmpty()) {
+        List<SongArtist> songArtists = dataSource.querySongInfoView(title);
+
+        if (songArtists == null || songArtists.isEmpty()) {
             System.out.println("Couldn't find the artist for the song");
             return;
         }
@@ -84,6 +89,8 @@ public class Main {
                     ", track number = " + artist.getTrack()
             );
         }
+
+        scanner.close();
     }
 
 }
