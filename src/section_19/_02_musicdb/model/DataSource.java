@@ -9,29 +9,29 @@ public class DataSource {
     private static final String DB_NAME = "music.db";
     private static final String CONNECTION_STRING = "jdbc:sqlite:/home/armitage/IdeaProjects/UdemyJavaMasterclass/" + DB_NAME;
 
-    private static final String TABLE_ALBUMS = "albums";
-    private static final String COLUMN_ALBUM_ID = "_id";
-    private static final String COLUMN_ALBUM_NAME = "name";
-    private static final String COLUMN_ALBUM_ARTIST = "artist";
-    private static final int INDEX_ALBUM_ID = 1;
-    private static final int INDEX_ALBUM_NAME = 2;
-    private static final int INDEX_ALBUM_ARTIST = 3;
+    public static final String TABLE_ALBUMS = "albums";
+    public static final String COLUMN_ALBUM_ID = "_id";
+    public static final String COLUMN_ALBUM_NAME = "name";
+    public static final String COLUMN_ALBUM_ARTIST = "artist";
+    public static final int INDEX_ALBUM_ID = 1;
+    public static final int INDEX_ALBUM_NAME = 2;
+    public static final int INDEX_ALBUM_ARTIST = 3;
 
-    private static final String TABLE_ARTISTS = "artists";
-    private static final String COLUMN_ARTIST_ID = "_id";
-    private static final String COLUMN_ARTIST_NAME = "name";
-    private static final int INDEX_ARTIST_ID = 1;
-    private static final int INDEX_ARTIST_NAME = 2;
+    public static final String TABLE_ARTISTS = "artists";
+    public static final String COLUMN_ARTIST_ID = "_id";
+    public static final String COLUMN_ARTIST_NAME = "name";
+    public static final int INDEX_ARTIST_ID = 1;
+    public static final int INDEX_ARTIST_NAME = 2;
 
-    private static final String TABLE_SONGS = "songs";
-    private static final String COLUMN_SONG_ID = "_id";
-    private static final String COLUMN_SONG_TRACK = "track";
-    private static final String COLUMN_SONG_TITLE = "title";
-    private static final String COLUMN_SONG_ALBUM = "album";
-    private static final int INDEX_SONG_ID = 1;
-    private static final int INDEX_SONG_TRACK = 2;
-    private static final int INDEX_SONG_TITLE = 3;
-    private static final int INDEX_SONG_ALBUM = 4;
+    public static final String TABLE_SONGS = "songs";
+    public static final String COLUMN_SONG_ID = "_id";
+    public static final String COLUMN_SONG_TRACK = "track";
+    public static final String COLUMN_SONG_TITLE = "title";
+    public static final String COLUMN_SONG_ALBUM = "album";
+    public static final int INDEX_SONG_ID = 1;
+    public static final int INDEX_SONG_TRACK = 2;
+    public static final int INDEX_SONG_TITLE = 3;
+    public static final int INDEX_SONG_ALBUM = 4;
 
     public static final int ORDER_BY_NONE = 1;
     public static final int ORDER_BY_ASC = 2;
@@ -59,6 +59,31 @@ public class DataSource {
     public static final String QUERY_ARTIST_FOR_SONG_SORT =
             " ORDER BY " + TABLE_ARTISTS + "." + COLUMN_ARTIST_NAME + ", " +
                     TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + " COLLATE NOCASE ";
+
+    public static final String TABLE_ARTIST_SONG_VIEW = "artist_list";
+    /*
+    CREATE VIEW IF NOT EXISTS artist_list AS SELECT artists.name, albums.name AS album,
+    songs.track, songs.title FROM songs INNER JOIN albums ON songs.album = albums._id
+    INNER JOIN artists ON albums.artist = artists._id ORDER BY artists.name,
+    albums.name, songs.track
+     */
+    public static final String CREATE_ARTIST_FOR_SONG_VIEW = "CREATE VIEW IF NOT EXISTS " +
+            TABLE_ARTIST_SONG_VIEW + " AS SELECT " + TABLE_ARTISTS + "." + COLUMN_ARTIST_NAME + ", " +
+            TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + " AS " + COLUMN_SONG_ALBUM + ", " +
+            TABLE_SONGS + "." + COLUMN_SONG_TRACK + ", " + TABLE_SONGS + "." + COLUMN_SONG_TITLE +
+            " FROM " + TABLE_SONGS +
+            " INNER JOIN " + TABLE_ALBUMS + " ON " + TABLE_SONGS +
+            "." + COLUMN_SONG_ALBUM + " = " + TABLE_ALBUMS + "." + COLUMN_ALBUM_ID +
+            " INNER JOIN " + TABLE_ARTISTS + " ON " + TABLE_ALBUMS + "." + COLUMN_ALBUM_ARTIST +
+            " = " + TABLE_ARTISTS + "." + COLUMN_ARTIST_ID +
+            " ORDER BY " +
+            TABLE_ARTISTS + "." + COLUMN_ARTIST_NAME + ", " +
+            TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + ", " +
+            TABLE_SONGS + "." + COLUMN_SONG_TRACK;
+
+    public static final String QUERY_VIEW_SONG_INFO = "SELECT " + COLUMN_ARTIST_NAME + ", " +
+            COLUMN_SONG_ALBUM + ", " + COLUMN_SONG_TRACK + " FROM " + TABLE_ARTIST_SONG_VIEW +
+            " WHERE " + COLUMN_SONG_TITLE + "=\"";
 
     private Connection conn;
 
@@ -228,6 +253,56 @@ public class DataSource {
             }
         } catch (SQLException e) {
             System.out.println("Query failed: " + e.getMessage());
+        }
+    }
+
+    public int getCount(String table) {
+        String sql = "SELECT COUNT(*) AS count FROM " + table;
+
+        try (Statement statement = conn.createStatement();
+            ResultSet results = statement.executeQuery(sql)) {
+            int count = results.getInt("count");
+            return count;
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return -1;
+        }
+    }
+
+    public boolean createViewForSongArtist() {
+        try (Statement statement = conn.createStatement()) {
+            statement.execute(CREATE_ARTIST_FOR_SONG_VIEW);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return  false;
+        }
+    }
+
+    // SELECT name, album, track FROM artist_list WHERE title = "Go Your Own Way";
+    public List<SongArtist> querySongInfoView(String title) {
+        StringBuilder sb = new StringBuilder(QUERY_VIEW_SONG_INFO);
+        sb.append(title);
+        sb.append("\"");
+
+        System.out.println("SQL statement: " + sb.toString());
+
+        try (Statement statement = conn.createStatement();
+            ResultSet results = statement.executeQuery(sb.toString())) {
+            List<SongArtist> songArtists = new ArrayList<>();
+
+            while(results.next()) {
+                SongArtist songArtist = new SongArtist();
+                songArtist.setArtistName(results.getString(1));
+                songArtist.setAlbumName(results.getString(2));
+                songArtist.setTrack(results.getInt(3));
+                songArtists.add(songArtist);
+            }
+
+            return songArtists;
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return null;
         }
     }
 
