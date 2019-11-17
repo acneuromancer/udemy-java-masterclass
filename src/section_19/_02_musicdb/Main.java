@@ -20,7 +20,7 @@ public class Main {
             return;
         }
 
-        query5();
+        insertSongExample();
 
         dataSource.close();
     }
@@ -91,6 +91,10 @@ public class Main {
         }
 
         scanner.close();
+    }
+
+    private static void insertSongExample() {
+        dataSource.insertSong("Bird Dog", "Everly Brothers", "All-Time Greatest Hits", 7);
     }
 
 }
