@@ -1,4 +1,4 @@
-package section_20._01_clientandserver;
+package section_20._02_clientandserverthread;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class Client {
 
     public static void main(String[] args) {
-        // We have to specify the address of the host we want to connect to, and the port number
         try (Socket socket = new Socket("localhost", 5000)) {
             BufferedReader echoes = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter stringToEcho = new PrintWriter(socket.getOutputStream(), true);
@@ -23,14 +22,15 @@ public class Client {
                 System.out.println("Echo string to be echoed:");
                 echoString = scanner.nextLine();
                 stringToEcho.println(echoString);
+
                 if (!echoString.equals("exit")) {
                     response = echoes.readLine();
                     System.out.println(response);
                 }
-            } while (!echoString.equals("exit"));
-
+            } while(!echoString.equals("exit"));
         } catch (IOException e) {
             System.out.println("Client error: " + e.getMessage());
         }
     }
+
 }
