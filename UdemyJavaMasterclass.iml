@@ -19,5 +19,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="sqlite-jdbc-3.27.2.1" level="project" />
+    <orderEntry type="library" name="apache-http-client" level="project" />
   </component>
 </module>
